@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+import MobileVerification from './pages/MobileVerification';
+import MobileOtp from "./pages/MobileOtp";
+import EmailVerification from "./pages/EmailVerification";
+import EmailOtpp from "./pages/EmailOtpp";
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <MobileVerification /> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MobileVerification />} />
+          <Route path="/mobile-otp" element={<MobileOtp />} />
+          <Route path="/email-verify" element={<EmailVerification />} />
+          <Route path="/email-otp" element={<EmailOtpp />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
