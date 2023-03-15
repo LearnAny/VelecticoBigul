@@ -100,7 +100,7 @@ const EmailOtp = () => {
               inputStyles={mystyle}
               OTPLength={6}
               otpType="number"
-              disabled={false}
+              disabled={timer === 0 ? true : false}
             />
           </div>
           {otp.length < 5 ? (
