@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import HttpClient from "../utils/HttpClient";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import OTPInput, { ResendOTP } from "otp-input-react";
 import Modal from "./ModalNotification";
 import TopOtp from "./../images/topotp.png";
 import SmallLogo from "./../images/smalllogo.png";
@@ -12,19 +13,37 @@ const EmailOtp = () => {
   const userEmail = reactLocalStorage.get("userEmail");
   // console.log(userMobileNumber);
   const navigate = useNavigate();
-  const [otp1, setOtp1] = useState("");
-  const [otp2, setOtp2] = useState("");
-  const [otp3, setOtp3] = useState("");
-  const [otp4, setOtp4] = useState("");
-  const [otp5, setOtp5] = useState("");
-  const [otp6, setOtp6] = useState("");
-  const [isActiveButton, setIsActiveButton] = useState(false);
+  const [otp, setOtp] = useState("");
   const [isModal, setIsModal] = useState(false);
+  const [timer, setTimer] = useState(30);
+
+  // useEffect(() => {
+  //   let interval;
+
+  //   if (timer > 0) {
+  //     interval = setInterval(() => {
+  //       setTimer((prevTimer) => prevTimer - 1);
+  //     }, 1000);
+  //   }
+
+  //   return () => clearInterval(interval);
+  // }, [timer]);
+
+  const mystyle = {
+    width: "63.45px",
+    height: "84.6px",
+    margin: "5px",
+    textAlign: "center",
+    fontSize: "18px",
+    background: "#ffffff",
+    border: "1px solid rgba(35, 31, 32, 0.25)",
+    borderRadius: "5px",
+  };
 
   const changeOtpToVerify = async () => {
     // console.log("otp", otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
     // setIsModal(!isModal);
-    let otp = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
+    // let otp = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
     let data = new FormData();
     data.append("email_otp", otp);
     data.append("email", userEmail);
@@ -74,81 +93,17 @@ const EmailOtp = () => {
             </a> */}
           </p>
           <div className="otp-box">
-            <input
-              type="text"
-              className="otp-input"
-              value={otp1}
-              maxLength={1}
-              onChange={(val) => {
-                // setOtp1(val.target.value)
-                if (val.target.value.match("^[0-9 ]*$") != null) {
-                  setOtp1(val.target.value);
-                }
-              }}
-            />
-            <input
-              type="text"
-              className="otp-input"
-              value={otp2}
-              maxLength={1}
-              onChange={(val) => {
-                // setOtp1(val.target.value)
-                if (val.target.value.match("^[0-9 ]*$") != null) {
-                  setOtp2(val.target.value);
-                }
-              }}
-            />
-            <input
-              type="text"
-              className="otp-input"
-              value={otp3}
-              maxLength={1}
-              onChange={(val) => {
-                // setOtp1(val.target.value)
-                if (val.target.value.match("^[0-9 ]*$") != null) {
-                  setOtp3(val.target.value);
-                }
-              }}
-            />
-            <input
-              type="text"
-              className="otp-input"
-              value={otp4}
-              maxLength={1}
-              onChange={(val) => {
-                // setOtp1(val.target.value)
-                if (val.target.value.match("^[0-9 ]*$") != null) {
-                  setOtp4(val.target.value);
-                }
-              }}
-            />
-            <input
-              type="text"
-              className="otp-input"
-              value={otp5}
-              maxLength={1}
-              onChange={(val) => {
-                // setOtp1(val.target.value)
-                if (val.target.value.match("^[0-9 ]*$") != null) {
-                  setOtp5(val.target.value);
-                }
-              }}
-            />
-            <input
-              type="text"
-              className="otp-input"
-              value={otp6}
-              maxLength={1}
-              onChange={(val) => {
-                // setOtp1(val.target.value)
-                if (val.target.value.match("^[0-9 ]*$") != null) {
-                  setOtp6(val.target.value);
-                  setIsActiveButton(true);
-                }
-              }}
+            <OTPInput
+              value={otp}
+              onChange={setOtp}
+              autoFocus
+              inputStyles={mystyle}
+              OTPLength={6}
+              otpType="number"
+              disabled={false}
             />
           </div>
-          {!isActiveButton ? (
+          {otp.length < 5 ? (
             <button className="btn-opt">Verify Email</button>
           ) : (
             <button className="btn-opt-active" onClick={changeOtpToVerify}>
