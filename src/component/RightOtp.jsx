@@ -15,7 +15,7 @@ const RightOtp = () => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [isModal, setIsModal] = useState(false);
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(10);
 
   useEffect(() => {
     let interval;
@@ -29,10 +29,12 @@ const RightOtp = () => {
     return () => clearInterval(interval);
   }, [timer]);
 
-  // const handleResendOtp = () => {
-  //   setTimer(60);
-  //   resendOtp();
-  // };
+  const handleResendOtp = () => {
+    setTimer(10);
+   // resendOtp();
+  };
+
+
   const mystyle = {
     width: "63.45px",
     height: "84.6px",
@@ -101,15 +103,22 @@ const RightOtp = () => {
               value={otp}
               onChange={setOtp}
               autoFocus
-              inputStyles={mystyle}
+              // inputStyles={mystyle}
+              className={'otp-input'}
               OTPLength={6}
               otpType="number"
-              disabled={timer === 0 ? true : false}
+             
             />
           </div>
           <div className="timer">
-            <p className="time">00 : {timer}</p>
-            <p className="timer-text">Resend OTP</p>
+            {
+              timer > 0 ?  <p className="time">00 : {timer}</p>
+              :
+              null
+            }
+           
+            <a className={timer === 0 ? "timer-text enabled" : "timer-text disabled" } 
+            onClick={timer === 0 ? handleResendOtp : null}>Resend OTP</a>
           </div>
           {otp.length < 5 ? (
             <button className="btn-opt">Verify Mobile Number</button>

@@ -249,11 +249,16 @@
   font-size: 18px;
   line-height: 27px;
   /* identical to box height */
-
+  cursor: pointer;
   text-align: center;
   text-decoration-line: underline;
-
   color: rgba(35, 31, 32, 0.25);
+}
+.disabled{
+  color: rgba(35, 31, 32, 0.25);
+}
+.enabled{
+  color:#5367fc;
 }
 .otp-text {
   font-family: "Poppins";
@@ -284,15 +289,15 @@
   display: flex;
   justify-content: space-between;
 }
-.otp-input {
-  width: 63.45px;
-  height: 84.6px;
-  margin: 5px;
-  text-align: center;
-  font-size: 18px;
-  background: #ffffff;
-  border: 1px solid rgba(35, 31, 32, 0.25);
-  border-radius: 5px;
+.otp-input input{
+  width: 63.45px !important;
+  height: 84.6px !important;
+  margin: 5px !important;
+  text-align: center !important;
+  font-size: 18px !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(35, 31, 32, 0.25) !important;
+  border-radius: 5px !important;
 }
 .btn-opt {
   margin: 20px auto;
@@ -426,5 +431,40 @@
   }
   .right-img {
       padding: 0px 170px 0px 0px;
+  }
+
+  /* sudipta  */
+    .btn-input {
+      width: 350px;
+    }
+    .input{
+      width: 332px;
+    }
+    .sign-btn{
+      width: 300px;
+    }
+    .input::placeholder {
+      font-size: 14px;
+    }
+
+    .btn-opt{
+      width:280px;
+    }
+    .otp-input input{
+      width: 38.45px !important;
+      height: 51.6px  !important;
+    }
+    .btn-opt-active{
+      width: 280px;
+    }
+    .modal-body{
+      width: 330px;
+    }
+    .modal-img {
+      width: 280px;
+      height: 280px;
+  }
+  .text-otp-sub{
+    width: 350px;
   }
 }

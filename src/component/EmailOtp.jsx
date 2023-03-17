@@ -97,7 +97,8 @@ const EmailOtp = () => {
               value={otp}
               onChange={setOtp}
               autoFocus
-              inputStyles={mystyle}
+              // inputStyles={mystyle}
+              className={'otp-input'}
               OTPLength={6}
               otpType="number"
               disabled={timer === 0 ? true : false}
